@@ -22,3 +22,40 @@ def procesar_ronda(ronda):
     datos_ordenados = sorted(datos, key=lambda x: x[4], reverse=True) # Ordeno los datos de forma descendente
     return datos_ordenados, mvps_ronda
 
+# Imprimo una ronda respetando el formato
+def imprimir_ronda(numero, datos_ronda):
+    print(f"\n Ranking ronda {numero}:")
+    print(f"{'Jugador':<10} {'Kills':<6} {'Asistencias':<10} {'Muerte':<8} {'Puntos':<6}")  # Trabajo el formato de impresión del programa
+    print("-" * 75)
+    for jugador, kills, assists, deaths, puntos in datos_ronda:
+        muerte_str = "Sí" if deaths else "No" # Transforma en string el booleano muerte
+        print(f"{jugador:<10} {kills:<6} {assists:<10} {muerte_str:<8} {puntos:<6}")
+
+# Voy a recibir un diccionario de totales al que voy a cargar con los datos de cada jugador por ronda para facilitar su impresión
+def actualizar_totales(totales, ronda):
+    for jugador, stats in ronda.items():
+        if jugador not in totales:
+            totales[jugador] = {'kills': 0, 'assists': 0, 'deaths': 0}
+        totales[jugador]['kills'] += stats['kills']
+        totales[jugador]['assists'] += stats['assists']
+        if stats['deaths']:
+            totales[jugador]['deaths'] += 1
+
+
+# Defino la tabla final pedida agregando MVP's y Puntos totales
+def imprimir_totales(totales, mvps):
+    print("\n Ranking final:")
+    print(f"{'Jugador':<10} {'Kills':<6} {'Asistencias':<10} {'Muertes':<8} {'MVPs':<5} {'Puntos':<6}")
+    print("-" * 84)
+    jugadores = sorted(totales.items(), key=lambda j: calcular_puntaje(
+        j[1]['kills'], j[1]['assists'], j[1]['deaths']), reverse=True) 
+    
+    for jugador, stats in jugadores:
+        kills = stats['kills']
+        assists = stats['assists']
+        deaths = stats['deaths']
+        mvp_count = mvps.get(jugador, 0)
+        puntos = calcular_puntaje(kills, assists, deaths)
+        print(f"{jugador:<10} {kills:<6} {assists:<10} {deaths:<8} {mvp_count:<5} {puntos:<6}")
+
+

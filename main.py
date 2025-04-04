@@ -1,3 +1,5 @@
+from src import funciones
+
 rounds = [
     {
         'Shadow': {'kills': 2, 'assists': 1, 'deaths': True},
@@ -35,4 +37,7 @@ rounds = [
         'Reaper': {'kills': 1, 'assists': 1, 'deaths': True}
     }
 ]
+
+funciones.tabla_de_puntajes(rounds)
+    
 

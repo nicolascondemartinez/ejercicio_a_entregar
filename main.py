@@ -38,6 +38,6 @@ rounds = [
     }
 ]
 
-funciones.tabla_de_puntajes(rounds)
+funciones.imprimir_total(rounds)
     
 

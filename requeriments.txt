@@ -1,0 +1,2 @@
+jupyter notebook==7.3.3
+Python==3.12.9

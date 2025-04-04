@@ -58,4 +58,17 @@ def imprimir_totales(totales, mvps):
         puntos = calcular_puntaje(kills, assists, deaths)
         print(f"{jugador:<10} {kills:<6} {assists:<10} {deaths:<8} {mvp_count:<5} {puntos:<6}")
 
+# Utilizo una función que llame a todas las otras funciones pasandole los datos y de manera ordenada
+def imprimir_total(rounds):
+    totales = {} # Creo el diccionario de los datos totales
+    mvps = {jugador: 0 for jugador in rounds[0]} # Inicializo una lista de diccionarios con valor 0 para cargar los MVP's
+
+    for i, ronda in enumerate(rounds):
+        datos_ronda, mvps_ronda = procesar_ronda(ronda)
+        imprimir_ronda(i + 1, datos_ronda)
+        actualizar_totales(totales, ronda)
+        for jugador in mvps_ronda:
+            mvps[jugador] += 1
+
+    imprimir_totales(totales, mvps)
 

@@ -29,7 +29,7 @@ def imprimir_ronda(numero, datos_ronda):
     print("-" * 75)
     for jugador, kills, assists, deaths, puntos in datos_ronda:
         muerte_str = "Sí" if deaths else "No" # Transforma en string el booleano muerte
-        print(f"{jugador:<10} {kills:<6} {assists:<10} {muerte_str:<8} {puntos:<6}")
+        print(f"{jugador:<12} {kills:<8} {assists:<9} {muerte_str:<8} {puntos:<6}")
 
 # Voy a recibir un diccionario de totales al que voy a cargar con los datos de cada jugador por ronda para facilitar su impresión
 def actualizar_totales(totales, ronda):
@@ -56,7 +56,7 @@ def imprimir_totales(totales, mvps):
         deaths = stats['deaths']
         mvp_count = mvps.get(jugador, 0)
         puntos = calcular_puntaje(kills, assists, deaths)
-        print(f"{jugador:<10} {kills:<6} {assists:<10} {deaths:<8} {mvp_count:<5} {puntos:<6}")
+        print(f"{jugador:<12} {kills:<8} {assists:<9} {deaths:<8} {mvp_count:<5} {puntos:<6}")
 
 # Utilizo una función que llame a todas las otras funciones pasandole los datos y de manera ordenada
 def imprimir_total(rounds):
